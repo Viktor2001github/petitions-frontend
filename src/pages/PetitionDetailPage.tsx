@@ -17,7 +17,7 @@ interface Vote {
   createdAt: string;
 }
 
-const BACKEND_URL = 'http://localhost:5000';
+const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://petitions-backend.onrender.com';
 const TARGET_VOTES = 500; // Оновлений ліміт підписів
 const VOTING_PERIOD_DAYS = 90; // Стандартний термін збору підписів
 
