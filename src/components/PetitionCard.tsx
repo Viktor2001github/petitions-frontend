@@ -7,7 +7,8 @@ interface PetitionCardProps {
   targetVotes?: number;
 }
 
-const BACKEND_URL = import.meta.env.VITE_API_URL || 'https://petitions-backend.onrender.com';
+const rawUrl = import.meta.env.VITE_API_URL || 'https://petitions-backend.onrender.com';
+const BACKEND_URL = rawUrl.replace(/\/+$/, '');
 
 const DEFAULT_PLACEHOLDER = `data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="320" height="180" viewBox="0 0 320 180"><rect width="320" height="180" fill="%23eeeeee"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="16" fill="%23888888">Немає фото</text></svg>`;
 

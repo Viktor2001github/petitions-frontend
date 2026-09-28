@@ -1,18 +1,14 @@
 import axios from 'axios';
 
-const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL 
-    ? `${import.meta.env.VITE_API_URL}/api` 
-    : 'https://petitions-backend.onrender.com/api',
-});
+// Очищаємо VITE_API_URL від можливого слешу в кінці
+const rawUrl = import.meta.env.VITE_API_URL || 'https://petitions-backend.onrender.com';
+const cleanUrl = rawUrl.replace(/\/+$/, '');
 
-// Автоматично додаємо токен до кожного запиту
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('token'); // або 'accessToken' — перевір як називається ключ у LocalStorage
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
+const api = axios.create({
+  baseURL: `${cleanUrl}/api`,
+  headers: {
+    'Content-Type': 'application/json',
+  },
 });
 
 export default api;
