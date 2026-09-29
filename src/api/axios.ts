@@ -1,24 +1,27 @@
 import axios from 'axios';
 
+// Якщо змінна з Vercel задана, використовуємо її + '/api', інакше дефолтний URL
+const baseURL = (import.meta.env.VITE_API_URL 
+  ? `${import.meta.env.VITE_API_URL}/api` 
+  : 'https://petitions-backend.onrender.com/api'
+).replace(/\/+/g, '/').replace(':/', '://');
+
 const api = axios.create({
-  baseURL: 'https://petitions-backend.onrender.com/api',
+  baseURL,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
-// Додаємо перехоплювач (Interceptor), який перед КОЖНИМ запитом дістає токен
 api.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('token'); // Використовуємо ваш ключ 'token'
+    const token = localStorage.getItem('token');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
   },
-  (error) => {
-    return Promise.reject(error);
-  }
+  (error) => Promise.reject(error)
 );
 
 export default api;
