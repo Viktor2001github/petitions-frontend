@@ -356,10 +356,11 @@ export const PetitionsPage: React.FC = () => {
         </div>
 
         <div className="category-wrapper">
-          <span style={{ fontSize: '14px', fontWeight: 'bold', color: '#ffffff' }}>
+          <label htmlFor="category-select" style={{ fontWeight: 'bold' }}>
             За напрямками:
-          </span>
+          </label>
           <select 
+            id="category-select"
             value={selectedCategory} 
             onChange={handleCategoryChange}
             className="category-select"
