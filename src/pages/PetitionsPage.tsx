@@ -356,7 +356,7 @@ export const PetitionsPage: React.FC = () => {
         </div>
 
         <div className="category-wrapper">
-          <label htmlFor="category-select" style={{ fontWeight: 'bold' }}>
+          <label htmlFor="category-select" style={{ fontWeight: 'bold', color:'white' }}>
             За напрямками:
           </label>
           <select 
