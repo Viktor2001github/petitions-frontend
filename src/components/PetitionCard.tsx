@@ -63,7 +63,7 @@ export const PetitionCard: React.FC<PetitionCardProps> = ({ petition, targetVote
 
       {/* Синій блок з лічильником голосів */}
       <div style={{
-        background: '#3498db',
+        background: '#186294',
         color: '#fff',
         textAlign: 'center',
         padding: '8px 0',

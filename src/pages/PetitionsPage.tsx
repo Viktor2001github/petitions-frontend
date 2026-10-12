@@ -313,7 +313,7 @@ export const PetitionsPage: React.FC = () => {
           style={{ 
             padding: '12px 24px', 
             background: '#f1c40f', 
-            color: '#001cbb', 
+            color: '#000731', 
             border: 'none', 
             borderRadius: '8px', 
             fontSize: '16px', 
