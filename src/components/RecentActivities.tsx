@@ -28,9 +28,9 @@ export const RecentActivities: React.FC = () => {
 
   return (
     <div className="sidebar" style={{ background: '#0a407e', color: '#fff', padding: '20px', borderRadius: '8px', height: 'fit-content', boxSizing: 'border-box', width: '300px' }}>
-      <h2 style={{ margin: '0 0 15px 0', borderBottom: '1px solid #aaa', paddingBottom: '10px' }}>
+      <h3 style={{ margin: '0 0 15px 0', borderBottom: '1px solid #aaa', paddingBottom: '10px' }}>
         Останні дії
-      </h2>
+      </h3>
 
       {activities.length === 0 ? (
         <p style={{ fontSize: '13px', color: '#ccc' }}>Активностей поки немає.</p>

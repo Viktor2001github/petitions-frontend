@@ -75,9 +75,9 @@ export const PetitionCard: React.FC<PetitionCardProps> = ({ petition, targetVote
 
       {/* Заголовок */}
       <div style={{ padding: '15px', flexGrow: 1 }}>
-        <h3 style={{ margin: 0, fontSize: '15px', color: '#333', lineHeight: '1.4' }}>
+        <h2 style={{ margin: 0, fontSize: '15px', color: '#333', lineHeight: '1.4' }}>
           {petition.title}
-        </h3>
+        </h2>
       </div>
 
       {/* Дати та статус */}
