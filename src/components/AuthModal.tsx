@@ -166,8 +166,8 @@ export const AuthModal: React.FC = () => {
 
   return (
     <div style={overlayStyle}>
-      <div style={modalStyle }ref={modalRef}>
-        <button type="button" onClick={closeAuthModal} style={closeButtonStyle}>✕</button>
+      <div style={modalStyle} ref={modalRef}>
+        <button type="button" onClick={closeAuthModal} style={closeButtonStyle} aria-label="Закрити вікно">✕</button>
         
         <h2 style={{ textAlign: 'center', marginBottom: '8px' }}>
           {isForgotPasswordView 
@@ -200,8 +200,9 @@ export const AuthModal: React.FC = () => {
                 {error && <div style={{ color: 'red', marginBottom: '10px', fontSize: '14px', textAlign: 'center' }}>{error}</div>}
 
                 <div style={inputGroupStyle}>
-                  <label>Email *:</label>
+                  <label htmlFor="forgot-email">Email *:</label>
                   <input 
+                    id="forgot-email"
                     type="email" 
                     required 
                     value={email} 
@@ -255,8 +256,8 @@ export const AuthModal: React.FC = () => {
                 <>
                   <div style={inputGroupStyle}>
                     <label htmlFor="reg-lastname">Прізвище *:</label>
-                    <input
-                      id="reg-lastname" 
+                    <input 
+                      id="reg-lastname"
                       type="text" 
                       required 
                       value={lastName} 
@@ -266,7 +267,7 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div style={inputGroupStyle}>
-                    <label htmlFor="">Ім'я *:</label>
+                    <label htmlFor="reg-firstname">Ім'я *:</label>
                     <input 
                       id="reg-firstname"
                       type="text" 
@@ -278,7 +279,7 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div style={inputGroupStyle}>
-                    <label htmlFor="">По батькові:</label>
+                    <label htmlFor="reg-middlename">По батькові:</label>
                     <input 
                       id="reg-middlename"
                       type="text" 
@@ -289,7 +290,7 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div style={inputGroupStyle}>
-                    <label htmlFor="">Телефон:</label>
+                    <label htmlFor="reg-phone">Телефон:</label>
                     <input 
                       id="reg-phone"
                       type="tel" 
@@ -302,7 +303,7 @@ export const AuthModal: React.FC = () => {
               )}
 
               <div style={inputGroupStyle}>
-                <label htmlFor="">Email *:</label>
+                <label htmlFor="auth-email">Email *:</label>
                 <input 
                   id="auth-email"
                   type="email" 
@@ -315,7 +316,7 @@ export const AuthModal: React.FC = () => {
               </div>
 
               <div style={inputGroupStyle}>
-                <label htmlFor="">Пароль *:</label>
+                <label htmlFor="auth-password">Пароль *:</label>
                 <input 
                   id="auth-password"
                   type="password" 
