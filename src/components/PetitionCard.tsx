@@ -21,9 +21,26 @@ export const PetitionCard: React.FC<PetitionCardProps> = ({ petition, targetVote
     return `${BACKEND_URL}${petition.imageUrl}`;
   };
 
+  const handleCardClick = () => {
+    navigate(`/petitions/${petition.id}`);
+  };
+
+  // Обробка натискання клавіш Enter та Space для доступності з клавіатури
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      navigate(`/petitions/${petition.id}`);
+    }
+  };
+
   return (
     <div 
-      onClick={() => navigate(`/petitions/${petition.id}`)}
+      role="button"
+      tabIndex={0} // Дозволяє картці отримувати фокус при натисканні Tab
+      onClick={handleCardClick}
+      onKeyDown={handleKeyDown}
+      aria-label={`Петиція: ${petition.title}`}
+      className="petition-card"
       style={{
         width: '320px',
         border: '1px solid #ccc',
@@ -36,6 +53,13 @@ export const PetitionCard: React.FC<PetitionCardProps> = ({ petition, targetVote
         position: 'relative'
       }}
     >
+      <style>{`
+        .petition-card:focus-visible {
+          outline: 3px solid #186294;
+          box-shadow: 0 0 8px rgba(24, 98, 148, 0.4);
+        }
+      `}</style>
+
       {/* Зображення та КАТЕГОРІЯ */}
       <div style={{ position: 'relative', height: '180px', width: '100%', background: '#eee' }}>
         <img 
@@ -75,9 +99,9 @@ export const PetitionCard: React.FC<PetitionCardProps> = ({ petition, targetVote
 
       {/* Заголовок */}
       <div style={{ padding: '15px', flexGrow: 1 }}>
-        <h2 style={{ margin: 0, fontSize: '15px', color: '#333', lineHeight: '1.4' }}>
+        <h3 style={{ margin: 0, fontSize: '15px', color: '#333', lineHeight: '1.4' }}>
           {petition.title}
-        </h2>
+        </h3>
       </div>
 
       {/* Дати та статус */}
