@@ -111,14 +111,14 @@ export const CreatePetitionPage: React.FC = () => {
         <div style={{ background: '#3498db', color: '#ffffff', padding: '30px' }}>
           <h1 style={{ margin: 0, fontSize: '28px', fontWeight: 'bold', textAlign: 'center' }}>Створити нову петицію</h1>
           <p style={{ margin: '8px 0 0 0', opacity: 0.9, fontSize: '14px', textAlign: 'center' }}>
-            Оформіть свою ініціативу, щоб зібрати підписи громади та привернути увагу органов влади.
+            Оформіть свою ініціативу, щоб зібрати підписи громади та привернути увагу органів влади.
           </p>
         </div>
 
         <form onSubmit={handleSubmit} style={{ padding: '30px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
           
           {error && (
-            <div style={{ backgroundColor: '#fde8e8', color: '#e74c3c', borderLeft: '4px solid #e74c3c', padding: '12px 16px', borderRadius: '4px', fontSize: '14px' }}>
+            <div role="alert" style={{ backgroundColor: '#fde8e8', color: '#e74c3c', borderLeft: '4px solid #e74c3c', padding: '12px 16px', borderRadius: '4px', fontSize: '14px' }}>
               {error}
             </div>
           )}
@@ -131,12 +131,13 @@ export const CreatePetitionPage: React.FC = () => {
           {/* Назва */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <label style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
+              <label htmlFor="petition-title" style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
                 Назва петиції <span style={{ color: '#e74c3c' }}>*</span>
               </label>
               <span style={{ fontSize: '12px', color: '#999' }}>{title.length}/200</span>
             </div>
             <input
+              id="petition-title"
               type="text"
               maxLength={200}
               required
@@ -149,10 +150,11 @@ export const CreatePetitionPage: React.FC = () => {
 
           {/* Категорія */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
+            <label htmlFor="petition-category" style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
               Категорія (напрямок) <span style={{ color: '#e74c3c' }}>*</span>
             </label>
             <select
+              id="petition-category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
               required
@@ -166,10 +168,11 @@ export const CreatePetitionPage: React.FC = () => {
 
           {/* Опис */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
+            <label htmlFor="petition-description" style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
               Суть та опис петиції <span style={{ color: '#e74c3c' }}>*</span>
             </label>
             <textarea
+              id="petition-description"
               required
               rows={6}
               value={description}
@@ -181,15 +184,16 @@ export const CreatePetitionPage: React.FC = () => {
 
           {/* Географія */}
           <div style={{ backgroundColor: '#f8f9fa', padding: '16px', borderRadius: '8px', border: '1px solid #e9ecef' }}>
-            <h3 style={{ margin: '0 0 12px 0', fontSize: '12px', color: '#7f8c8d', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            <h2 style={{ margin: '0 0 12px 0', fontSize: '12px', color: '#7f8c8d', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               Географія звернення <span style={{ color: '#e74c3c' }}>*</span>
-            </h3>
+            </h2>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '12px' }}>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#555', marginBottom: '4px' }}>
+                <label htmlFor="petition-postal" style={{ display: 'block', fontSize: '12px', color: '#555', marginBottom: '4px' }}>
                   Індекс <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <input
+                  id="petition-postal"
                   type="text"
                   required
                   value={postalCode}
@@ -199,10 +203,11 @@ export const CreatePetitionPage: React.FC = () => {
                 />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#555', marginBottom: '4px' }}>
+                <label htmlFor="petition-settlement" style={{ display: 'block', fontSize: '12px', color: '#555', marginBottom: '4px' }}>
                   Населений пункт <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <input
+                  id="petition-settlement"
                   type="text"
                   required
                   value={settlement}
@@ -212,10 +217,11 @@ export const CreatePetitionPage: React.FC = () => {
                 />
               </div>
               <div>
-                <label style={{ display: 'block', fontSize: '12px', color: '#555', marginBottom: '4px' }}>
+                <label htmlFor="petition-address" style={{ display: 'block', fontSize: '12px', color: '#555', marginBottom: '4px' }}>
                   Адреса <span style={{ color: '#e74c3c' }}>*</span>
                 </label>
                 <input
+                  id="petition-address"
                   type="text"
                   required
                   value={address}
@@ -227,23 +233,47 @@ export const CreatePetitionPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Фото обкладинки */}
+          {/* Фото обкладинки (Виправлено доступність скрінрідера) */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-            <label style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
+            <span id="file-label" style={{ fontWeight: '600', color: '#333', fontSize: '14px' }}>
               Обкладинка петиції <span style={{ color: '#e74c3c' }}>*</span>
-            </label>
+            </span>
+            
             {!imagePreview ? (
-              <label style={{ border: '2px dashed #cbd5e1', padding: '25px', textAlign: 'center', borderRadius: '8px', cursor: 'pointer', backgroundColor: '#fafafa' }}>
+              <label 
+                htmlFor="petition-file-input"
+                style={{ border: '2px dashed #cbd5e1', padding: '25px', textAlign: 'center', borderRadius: '8px', cursor: 'pointer', backgroundColor: '#fafafa' }}
+              >
                 <span style={{ color: '#64748b', fontSize: '14px', display: 'block', fontWeight: '500' }}>📷 Натисніть для завантаження фото</span>
                 <span style={{ color: '#94a3b8', fontSize: '12px', marginTop: '4px', display: 'block' }}>PNG, JPG або WEBP</span>
-                <input type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+                
+                {/* Інпут тепер доступний для фокусування клавіатурою і скрінрідерами */}
+                <input 
+                  id="petition-file-input"
+                  type="file" 
+                  accept="image/*" 
+                  onChange={handleImageChange} 
+                  aria-labelledby="file-label"
+                  style={{ 
+                    position: 'absolute', 
+                    width: '1px', 
+                    height: '1px', 
+                    padding: 0, 
+                    margin: '-1px', 
+                    overflow: 'hidden', 
+                    clip: 'rect(0,0,0,0,)', 
+                    whiteSpace: 'nowrap', 
+                    border: 0 
+                  }} 
+                />
               </label>
             ) : (
               <div style={{ position: 'relative', marginTop: '5px' }}>
-                <img src={imagePreview} alt="Прев’ю" style={{ width: '100%', maxHeight: '220px', objectFit: 'cover', borderRadius: '8px' }} />
+                <img src={imagePreview} alt="Прев’ю завантаженого фото" style={{ width: '100%', maxHeight: '220px', objectFit: 'cover', borderRadius: '8px' }} />
                 <button
                   type="button"
                   onClick={removeImage}
+                  aria-label="Видалити завантажене фото"
                   style={{ position: 'absolute', top: '10px', right: '10px', background: '#e74c3c', color: '#fff', border: 'none', borderRadius: '50%', width: '30px', height: '30px', cursor: 'pointer', fontWeight: 'bold' }}
                 >
                   ✕
