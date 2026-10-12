@@ -242,6 +242,7 @@ export const Header: React.FC = () => {
         {/* 2. Пошуковий блок */}
         <form onSubmit={handleSearch} className="header-search">
           <input 
+            aria-label="Пошук петицій"
             type="text" 
             placeholder="Пошук петицій..." 
             value={searchQuery}
@@ -295,7 +296,7 @@ export const Header: React.FC = () => {
           </Link>
         </nav>
 
-        {/* 4. Авторизація для ПК */}
+        {/* 4. Авторизація*/}
         <div className="header-auth-desktop">
           {user ? (
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', color: '#ffffff', fontSize: '14px' }}>
