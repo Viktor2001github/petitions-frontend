@@ -254,8 +254,9 @@ export const AuthModal: React.FC = () => {
               {authMode === 'register' && (
                 <>
                   <div style={inputGroupStyle}>
-                    <label>Прізвище *:</label>
-                    <input 
+                    <label htmlFor="reg-lastname">Прізвище *:</label>
+                    <input
+                      id="reg-lastname" 
                       type="text" 
                       required 
                       value={lastName} 
@@ -265,8 +266,9 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div style={inputGroupStyle}>
-                    <label>Ім'я *:</label>
+                    <label htmlFor="">Ім'я *:</label>
                     <input 
+                      id="reg-firstname"
                       type="text" 
                       required 
                       value={firstName} 
@@ -276,8 +278,9 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div style={inputGroupStyle}>
-                    <label>По батькові:</label>
+                    <label htmlFor="">По батькові:</label>
                     <input 
+                      id="reg-middlename"
                       type="text" 
                       value={middleName} 
                       onChange={(e) => setMiddleName(e.target.value)}
@@ -286,8 +289,9 @@ export const AuthModal: React.FC = () => {
                   </div>
 
                   <div style={inputGroupStyle}>
-                    <label>Телефон:</label>
+                    <label htmlFor="">Телефон:</label>
                     <input 
+                      id="reg-phone"
                       type="tel" 
                       value={phone} 
                       onChange={(e) => setPhone(e.target.value)}
@@ -298,8 +302,9 @@ export const AuthModal: React.FC = () => {
               )}
 
               <div style={inputGroupStyle}>
-                <label>Email *:</label>
+                <label htmlFor="">Email *:</label>
                 <input 
+                  id="auth-email"
                   type="email" 
                   autoComplete="username"
                   required 
@@ -310,8 +315,9 @@ export const AuthModal: React.FC = () => {
               </div>
 
               <div style={inputGroupStyle}>
-                <label>Пароль *:</label>
+                <label htmlFor="">Пароль *:</label>
                 <input 
+                  id="auth-password"
                   type="password" 
                   autoComplete={authMode === 'login' ? 'current-password' : 'new-password'}
                   required 
