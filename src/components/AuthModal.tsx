@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useAuth } from '../context/AuthContext';
 import api from '../api/axios';
 
@@ -22,9 +22,61 @@ export const AuthModal: React.FC = () => {
   // РОЗДІЛЕНІ СТАНИ ЗАВАНТАЖЕННЯ
   const [isEmailLoading, setIsEmailLoading] = useState(false);
   const [isDiiaLoading, setIsDiiaLoading] = useState(false);
+  
+  const modalRef = useRef<HTMLDivElement>(null);
+  // Автофокус та пастка фокусу (Focus Trap) для доступності клавіатури
+  useEffect(() => {
+    if (!isAuthModalOpen) return;
+
+    // Фокусуємо перший інтерактивний елемент при відкритті
+    const timer = setTimeout(() => {
+      const focusable = modalRef.current?.querySelectorAll<HTMLElement>(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      );
+      if (focusable && focusable.length > 0) {
+        focusable[0].focus();
+      }
+    }, 50);
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Закриття по Escape
+      if (e.key === 'Escape') {
+        closeAuthModal();
+      }
+
+      // Пастка фокусу по Tab всередині модалки
+      if (e.key === 'Tab' && modalRef.current) {
+        const focusableElements = modalRef.current.querySelectorAll<HTMLElement>(
+          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+        );
+        if (focusableElements.length === 0) return;
+
+        const firstElement = focusableElements[0];
+        const lastElement = focusableElements[focusableElements.length - 1];
+
+        if (e.shiftKey) {
+          if (document.activeElement === firstElement) {
+            e.preventDefault();
+            lastElement.focus();
+          }
+        } else {
+          if (document.activeElement === lastElement) {
+            e.preventDefault();
+            firstElement.focus();
+          }
+        }
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isAuthModalOpen, closeAuthModal, authMode, isForgotPasswordView]);
+
 
   if (!isAuthModalOpen) return null;
-
   // Хендлер для скидання пароля
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -114,7 +166,7 @@ export const AuthModal: React.FC = () => {
 
   return (
     <div style={overlayStyle}>
-      <div style={modalStyle}>
+      <div style={modalStyle }ref={modalRef}>
         <button type="button" onClick={closeAuthModal} style={closeButtonStyle}>✕</button>
         
         <h2 style={{ textAlign: 'center', marginBottom: '8px' }}>
