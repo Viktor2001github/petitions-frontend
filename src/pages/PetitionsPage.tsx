@@ -312,7 +312,7 @@ export const PetitionsPage: React.FC = () => {
           onClick={handleCreateClick}
           style={{ 
             padding: '12px 24px', 
-            background: '#f39c12', 
+            background: '#cc830d', 
             color: '#fff', 
             border: 'none', 
             borderRadius: '8px', 
